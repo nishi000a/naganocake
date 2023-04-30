@@ -1,0 +1,67 @@
+<div class="container text-center">
+  <h2 style="width: 200px; background-color: #EEEEEE; text-align: center;">注文情報確認</h2>
+
+      <div class="row">
+        <div class="text-center">
+          <table align="left" class="table table-bordered">
+            <tr>
+              <th style="width:150px;background-color: #EEEEEE;">商品名</th>
+              <th style="width:150px;background-color: #EEEEEE;">単価(税込)</th>
+              <th style="width:150px;background-color: #EEEEEE;">数量</th>
+              <th style="width:150px;background-color: #EEEEEE;">小計</th>
+            </tr>
+
+            <tbody>
+              <% @cart_items.each do |cart_item| %>
+                <tr>
+                  <td><%= cart_item.item.name %></td>
+                  <td><%= cart_item.item.with_tax_price %></td>
+                  <td><%= cart_item.amount %></td>
+                  <td><%= cart_item.subtotal %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="text-center" style="margin-left: 50px;">
+          <table class="table table-bordered">
+            <tr>
+              <th style="width:150px;background-color: #EEEEEE;">送料</th>
+              <th style="width:150px;">800</th>
+            </tr>
+
+            <tbody>
+              <tr>
+                <th style="width:150px;background-color: #EEEEEE;">商品合計</th>
+                <th>
+                  <% @cart_items.each do |cart_item| %>
+                    <% @total +=  (cart_item.item.price.to_i * 1.1).floor * cart_item.amount.to_i %>
+                  <% end %>
+                  <%= @total %>
+                </th>
+              </tr>
+
+              <tr>
+                <th style="width:150px;background-color: #EEEEEE;">請求額</th>
+                <th><%= @total+800 %></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div><br>
+
+      <p><strong>支払方法</strong>&emsp;<%= @order.payment_method %></p><br>
+
+    <%= form_with model: @order, local: true, url: orders_path, method: :post do |f| %>
+        <div class="text-center">
+          <%= f.submit "購入を確定する", class: "btn btn-success" %>
+          <%= f.hidden_field :payment_method, value: @order.payment_method %>
+          <%= f.hidden_field :shipping_cost, value: 800 %>
+          <%= f.hidden_field :total_payment, value: @total %>
+          <%= f.hidden_field :status, value: @order.status %>
+        </div>
+    <% end %>
+
+</div>

@@ -1,0 +1,12 @@
+  ja: # 日本語の設定を行う
+    enums: # enumの設定を行う
+      order: # モデル名（Orderモデルに対して）
+        payment_method: # カラム名（payment_methodカラムに対して）
+          credit_card: "クレジットカード"
+          transfer: "銀行振込"
+          
+      cart_item:
+        item_id: "29"
+        amount: "5"
+        
+      

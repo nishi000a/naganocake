@@ -1,0 +1,26 @@
+<div class="container text-center">
+
+  <h2 style="width: 180px;background-color: #EEEEEE; text-align: center;">商品編集</h2>
+
+
+      <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
+        <div class="text-center">
+          <div class="form-group"><th><%= f.label :商品画像 %></th><td><%= f.file_field :item_image, accept: "image/*" ,class: "btn btn-light" %></td></div>
+          <div class="form-group"><th><%= f.label :商品名 %></th><td><%= f.text_area :name, autofocus: true, autocomplete: "introduction" %></td></div>
+          <div class="form-group"><th><%= f.label :商品説明 %></th><td><%= f.text_area :introduction, autofocus: true, autocomplete: "introduction" %></td></div>
+          <div class="form-group"><th><%= f.label :税別価格 %></th><td><%= f.text_field :price %>円</td></div>
+          <div class="form-group"><th><%= f.label :販売ステータス %></th>
+              <td>
+                <%= f.radio_button :is_active, true, checked: true %>
+                <%= f.label :sales_status, "販売中" %>
+                <%= f.radio_button :is_active, false %>
+                <%= f.label :sales_status, "販売中止" %>
+              </td>
+          </div>
+        </div>
+
+    <div class="text-center"><%= f.submit :変更を保存, class: "btn btn-success" %><div>
+      <% end %>
+
+
+</div>

@@ -1,0 +1,27 @@
+<div class="container text-center">
+  <h2 style="width: 250px;background-color: #EEEEEE; text-align: center;"><span>商品一覧(全<%= @counts %>件)</span></h2><br>
+
+    <div class="row">
+          <% @items.each do |item| %>
+            <div class="box" style="float:left;">
+                <p>
+                  <%= link_to item_path(item.id) do %>
+                    <% if item.item_image.attached? %>
+                          <%= image_tag item.item_image, size: "200x200" %>
+                    <% else %>
+                           <%= image_tag 'no_image', size: "200x200" %>
+                    <% end %>
+                  <% end %>
+                </p>
+
+                <p><%= item.name %></p>
+                <p>¥<%= item.price %></p>
+            </div>
+          <% end %>
+    </div>
+
+    <div>
+      <%= paginate @items %>
+    </div>
+
+</div>

@@ -1,0 +1,57 @@
+<div class="container text-center">
+  <h2 style="width: 200px;background-color: #EEEEEE; text-align: center;">注文履歴詳細</h2>
+
+  <div class="row" style="margin-top: 50px">
+      <table>
+        <tr><th>購入者</th><td><%= @order.customer.last_name %> <%= @order.customer.first_name %></td></tr>
+        <tr><th>支払い方法</th><td><%= @order.payment_method %></td></tr>
+        <tr><th>注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d") %></td></tr>
+        <tr><th>注文ステータス</th>
+            <td>
+              <%= form_with model: @order, url: admin_order_path do |f| %>
+              　<%= f.select :status,["入金待ち","入金確認","製作中","発送準備中","発送済"] ,style: "margin-top:10px;" %>
+                <%= f.submit "更新" ,class: "btn btn-success" %>
+            </td>
+              <% end %>
+        </tr>
+      </table>
+  </div>
+
+  <div class="row" style="margin-top: 50px">
+    <div>
+      <table class="table">
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>製作ステータス</th>
+          <th></th>
+        </tr>
+
+        <% @order_details.each do |order_details| %>
+          <tr>
+            <td><%= order_details.item.name %></td>
+            <td><%= order_details.item.with_tax_price %></td>
+            <td><%= order_details.amount %></td>
+            <td><%= order_details.subtotal %></td>
+
+            <%= form_with model: @order_details, url: admin_order_path(order_details) do |f| %>
+              <td><%= f.select :making_status,["着手不可","製作待ち","製作中","製作完了"] %></td>
+              <td><%= f.submit "更新" ,class:"btn btn-success" %></td>
+            <% end %>
+          </tr>
+          <% end %>
+      </table>
+    </div>
+
+    <div style="margin-left: 100px">
+      <table>
+        <tr><th>商品合計</th><td><%= @total = @order.total_payment %>円</td></tr>
+        <tr><th>送料</th><td>800円</td></tr>
+        <tr><th>請求金額合計</th><td><%= @total+800 %>円</td></tr>
+      </table>
+    </div>
+        
+  </div>
+</div>

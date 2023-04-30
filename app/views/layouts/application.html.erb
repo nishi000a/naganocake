@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title class="text-success">NaganoCake</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top">
+      <div class="container">
+            <nav class="nav navbar-nav navbar-left">
+              <%= link_to root_path do %>
+                <%= image_tag "LOGO.png" %>
+              <% end %>
+            </nav>
+
+              <nav class="row">
+                <ul class="nav">
+                      <!-- public -->
+                    <% if customer_signed_in? %>
+                      <li class="nav-item">ようこそ、<%= current_customer.last_name %>さん！</li>&emsp;&emsp;&emsp;
+                      <li class="nav-item"><%= link_to customers_path, class: "btn btn-outline-secondary" do %>マイページ<% end %></li>&emsp;
+                      <li class="nav-item"><%= link_to items_path, class: "btn btn-outline-secondary" do %>商品一覧<% end %></li>&emsp;
+                      <li class="nav-item"><%= link_to cart_items_path, class: "btn btn-outline-secondary" do %>カート<% end %></li>&emsp;
+                      <li class="nav-item"><%= link_to destroy_customer_session_path, method: :delete, class: "btn btn-outline-secondary" do %>ログアウト<% end %></li>
+
+                    <!-- admin -->
+                    <% elsif admin_signed_in?%>
+                      <li><%= link_to admin_items_path, class: "btn btn-outline-secondary" do %>商品一覧<% end %></li>&emsp;
+                      <li><%= link_to admin_customers_path, class: "btn btn-outline-secondary" do %>会員一覧<% end %></li>&emsp;
+                      <li><%= link_to admin_admins_path, class: "btn btn-outline-secondary" do %>注文履歴一覧<% end %></li>&emsp;
+                      <li><%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary" do %>ログアウト<% end %></li>
+
+                    <!-- ログインしていない状態 -->
+                    <% else %>
+                      <li><%= link_to about_path, class: "btn btn-outline-secondary" do %>About<% end %></li>&emsp;
+                      <li><%= link_to items_path, class: "btn btn-outline-secondary" do %>商品一覧<% end %></li>&emsp;
+                      <li><%= link_to new_customer_registration_path, class: "btn btn-outline-secondary" do %>新規登録<% end %></li>&emsp;
+                      <li><%= link_to new_customer_session_path, class: "btn btn-outline-secondary" do %>ログイン<% end %></li>
+                    <% end %>
+                </ul>
+              </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container main-container">
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </main>
+
+  </body>
+</html>
+

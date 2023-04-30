@@ -1,0 +1,42 @@
+<div class="container text-center">
+  <h2 style="width: 250px;background-color: #EEEEEE; text-align: center;">注文情報入力</h2><br>
+
+  <div>
+      <%= form_with model: @order, local: true, url: orders_confirm_path, method: :post do |f| %>
+
+        <div class="text-left">
+          <h4><strong>支払い方法</strong></h4><br>
+
+            <label style="margin-left: 60px;">
+                <%= f.radio_button :payment_method, "credit_card" %>
+                <%= f.label :payment_method_credit_card, "クレジットカード" %>
+            </label><br>
+
+            <label style="margin-left: 60px;">
+                <%= f.radio_button :payment_method, "transfer" %>
+                <%= f.label :payment_method_transfer, "銀行振込" %>
+            </label>
+
+            <div class="text-center" style="margin-top:50px;">
+              <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+            </div>
+
+        </div>
+      <% end %>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

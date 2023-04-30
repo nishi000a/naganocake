@@ -1,0 +1,52 @@
+<div class="container text-center">
+  <h2 style="width: 300px;background-color: #EEEEEE;">マイページ</h2>
+
+    <div style="margin-top: 50px;">
+
+      <div class="row">
+          <h3><b>登録情報</b></h3>&emsp;
+          <p><%= link_to "編集する", edit_customers_path, class: "btn btn-success"%></p>
+      </div>
+
+      <table class="table table-bordered text-left">
+        <thead>
+            <tr>
+                <th style="width:150px;background-color: #EEEEEE;">氏名</th>
+                <td><%= @customer.first_name %>&ensp;<%= @customer.last_name %></td>
+            </tr>
+
+            <tr>
+                <th style="width:150px;background-color: #EEEEEE;">カナ</th>
+                <td><%= @customer.first_name_kana %>&ensp;<%= @customer.last_name_kana %></td>
+            </tr>
+
+            <tr>
+                <th style="width:150px;background-color: #EEEEEE;">郵便番号</th>
+                <td><%= @customer.postal_code %></td>
+            </tr>
+
+            <tr>
+                <th style="width:150px;background-color: #EEEEEE;">住所</th>
+                <td><%= @customer.address %></td>
+            </tr>
+
+            <tr>
+                <th style="width:150px;background-color: #EEEEEE;">電話番号</th>
+                <td><%= @customer.telephone_number %></td>
+            </tr>
+
+            <tr>
+                <th style="width:150px;background-color: #EEEEEE;">メールアドレス</th>
+                <td><%= @customer.email %></td>
+            </tr>
+        </thead>
+
+      </table>
+    </div>
+
+    <div class="row">
+      <h3><b>注文履歴</b></h3>&ensp;
+      <p><%= link_to "一覧を見る", orders_path, class: "btn btn-primary" %></p>
+    </div>
+
+</div>

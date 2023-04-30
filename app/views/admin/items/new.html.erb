@@ -1,0 +1,47 @@
+<div class="container">
+
+  <h2 style="width: 250px;background-color: #EEEEEE; text-align: center;">商品新規登録</h2></br>
+
+
+    <div class="text-center">
+      <%= form_with model: @item,url: admin_items_path,method: :post do |f| %>
+
+          <div class="field">
+              <%= f.label :商品画像 %>
+              <%= f.file_field :item_image, accept: "image/*" ,class: "btn btn-light" %>
+          </div>
+
+          <div class="field">
+            <h4>
+                <%= f.label :商品名 %>
+                <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+            </h4>
+          </div>
+
+          <div class="field">
+            <h4>
+                <%= f.label :商品説明 %>
+                <%= f.text_area :introduction, autofocus: true, autocomplete: "introduction" %>
+            </h4>
+          </div>
+
+          <div class="field">
+            <h4>
+                <%= f.label :税抜価格 %>
+                <%= f.text_field :price, autofocus: true, autocomplete: "price" %>
+            </h4>
+          </div>
+
+          <div class="field">
+            <h4>
+              <%= f.label :販売ステータス %>
+              <%= f.select :is_active, ["販売中", "販売停止"] ,class: "btn btn-primary"%>
+            </h4>
+          </div>
+
+          <div class="text-center"><%= f.submit "商品登録" ,class: "btn btn-primary"%>
+          </div>
+      <% end %>
+    </div>
+
+</div>
