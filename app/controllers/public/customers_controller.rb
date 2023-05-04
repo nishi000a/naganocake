@@ -1,5 +1,4 @@
 class Public::CustomersController < ApplicationController
-
   before_action :authenticate_customer!
 
   def show
@@ -27,9 +26,6 @@ class Public::CustomersController < ApplicationController
         flash[:danger] = '個人情報の編集に失敗しました'
         render :edit
     end
-  end
-
-  def withdraw
   end
 
   def destroy

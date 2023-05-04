@@ -9,11 +9,10 @@
 
   <table class="table table-hover">
     <thead>
-      <tr>
+      <tr style="background-color: #EEEEEE;">
         <th>商品ID</th>
         <th>商品名</th>
         <th>税抜価格</th>
-        <th>ジャンル</th>
         <th>ステータス</th>
         <th></th>
       </tr>
@@ -23,13 +22,8 @@
       <% @items.each do |item| %>
       <tr>
         <td><%= item.id %></td>
-        
-        <td><%= link_to admin_item_path(item) do %><%= item.name %>
-            <% end %>
-        </td>
+        <td><%= link_to admin_item_path(item) do %><%= item.name %><% end %></td>
         <td><%= item.price %></td>
-        <td><%= item.is_active %></td>
-        
         <td>
           <% if item.is_active? %>
               <span class="text-success">販売中</span>

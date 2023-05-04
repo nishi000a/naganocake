@@ -3,10 +3,11 @@
 
   <div class="row" style="margin-top: 50px">
       <table>
-        <tr><th>購入者</th><td><%= @order.customer.last_name %> <%= @order.customer.first_name %></td></tr>
-        <tr><th>支払い方法</th><td><%= @order.payment_method %></td></tr>
-        <tr><th>注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d") %></td></tr>
-        <tr><th>注文ステータス</th>
+        <tr><th style="background-color: #EEEEEE;">購入者</th><td><%= @order.customer.last_name %> <%= @order.customer.first_name %></td></tr>
+        <tr><th style="background-color: #EEEEEE;">支払い方法</th><td><%= @order.payment_method %></td></tr>
+        <tr><th style="background-color: #EEEEEE;">注文日</th><td><%= @order.created_at.strftime("%Y/%m/%d") %></td></tr>
+        <tr><th style="background-color: #EEEEEE;">配送先</th><td>〒<%= @order.postal_code %>&emsp;<%= @order.address %>&emsp;<%= @order.name %></td></tr>
+        <tr><th style="background-color: #EEEEEE;">注文ステータス</th>
             <td>
               <%= form_with model: @order, url: admin_order_path do |f| %>
               　<%= f.select :status,["入金待ち","入金確認","製作中","発送準備中","発送済"] ,style: "margin-top:10px;" %>
@@ -52,6 +53,6 @@
         <tr><th>請求金額合計</th><td><%= @total+800 %>円</td></tr>
       </table>
     </div>
-        
+
   </div>
 </div>
